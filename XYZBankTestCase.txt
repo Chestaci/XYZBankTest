@@ -1,0 +1,372 @@
+Кейс 1. Проверка успешного создания клиента
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  Name
+2. Заполнить поле Last Name значением  Surname
+3. Заполнить поле Post Code значением  111111
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+Кейс 2. Проверка успешного создания клиента с заполнением полей русскими и латинскими буквами в разных регистрах
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  иМяName
+2. Заполнить поле Last Name значением  фАмИлИяSuRname
+3. Заполнить поле Post Code значением  кОдPoStCode
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+Кейс 3. Проверка успешного создания клиента с заполнением полей одной цифрой
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  1
+2. Заполнить поле Last Name значением  1
+3. Заполнить поле Post Code значением  1
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+
+Кейс 4. Проверка успешного создания клиента с заполнением полей специальными символами
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  @#$%^&
+2. Заполнить поле Last Name значением  @#$%^&
+3. Заполнить поле Post Code значением  @#$%^&
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+
+
+Кейс 5. Проверка успешного создания клиента с заполнением полей длинными значениями
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением Nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+2. Заполнить поле Last Name значением  Surnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+3. Заполнить поле Post Code значением  111111111111111111111111111111111111111111111111
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+
+Кейс 6. Проверка успешного создания клиента с заполнением полей буквами и цифрами
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением Name123456
+2. Заполнить поле Last Name значением  Surname123456
+3. Заполнить поле Post Code значением  Postcode123456
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Customer added successfully with customer id :» и номер id
+
+
+
+
+
+Кейс 7. Проверка сообщения об ошибке при попытке добавления дубликата клиента
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Создать клиента (см. кейc 1)
+
+Шаги:
+
+1. Заполнить поле First Name значением  Name
+2. Заполнить поле Last Name значением  Surname
+3. Заполнить поле Post Code значением  111111
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Please check the details. Customer may be duplicate.»
+
+
+
+
+
+
+Кейс 8. Проверка сообщения об ошибке при попытке создания клиента с пустым полем First Name
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле Last Name значением  Surname
+2. Заполнить поле Post Code значением  111111
+3. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице под полем First Name появилась надпись: «Fill out this field.»
+
+
+
+
+
+
+Кейс 9. Проверка сообщения об ошибке при попытке создания клиента с пустым полем Last Name
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  Name
+2. Заполнить поле Post Code значением  111111
+3. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице под полем Last Name появилась надпись: «Fill out this field.»
+
+
+
+
+
+Кейс 10. Проверка сообщения об ошибке при попытке создания клиента с пустым полем Post Code
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name значением  Name
+2. Заполнить поле Last Name значением  Surname
+3. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице под полем Post Code появилась надпись: «Fill out this field.»
+
+
+
+
+
+
+Кейс 11. Проверка сообщения об ошибке при попытке создания клиента с заполнением полей пробелом
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Add Customer
+
+Шаги:
+
+1. Заполнить поле First Name пробелом
+2. Заполнить поле Last Name пробелом
+3. Заполнить поле Post Code пробелом
+4. Нажать на кнопку Add Customer
+
+Ожидаемый результат:
+
+1. На странице появилось всплывающее окно с надписью: «Please check the details. Customer may be duplicate.»
+
+
+
+
+
+
+
+Кейс 12. Проверка успешной сортировки клиентов по имени в обратном порядке
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Нажать 1 раз на вкладку First Name
+
+Ожидаемый результат:
+
+1. На странице Customers список клиентов отсортировался в обратном порядке
+
+
+
+
+
+
+Кейс 13. Проверка успешной сортировки клиентов по имени в алфавитном порядке
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Нажать 2 раза на вкладку First Name
+
+Ожидаемый результат:
+
+1. На странице Customers список клиентов отсортировался в алфавитном порядке
+
+
+
+
+
+
+
+Кейс 14. Проверка успешного поиска клиентов по совпадению букв
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Ввести в поле Search Customer латинскую букву l
+
+Ожидаемый результат:
+
+1. На странице Customers в списке клиентов остались только 3 строчки, в которых находятся Ron Weasly, Albus Dumbledore, Neville Longbottom.
+
+
+
+
+
+Кейс 15. Проверка успешного поиска клиента по фамилии
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Ввести в поле Search Customer значение Weasly
+
+Ожидаемый результат:
+
+1. На странице Customers в списке клиентов осталась только одна строка, в которой находится Ron Weasly.
+
+
+
+
+
+Кейс 16. Проверка успешного поиска клиента по совпадению цифр
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Ввести в поле Search Customer значение 55
+
+Ожидаемый результат:
+
+1. На странице Customers в списке клиентов остались только 2 строчки, в которых находятся  Ron Weasly, Albus Dumbledore.
+
+
+
+
+
+Кейс 17. Проверка поиска несуществующего клиента
+
+Предусловие:
+
+1. Открыть браузер
+2. Перейти на страницу https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
+3. Нажать на кнопку Customers
+
+Шаги:
+
+1. Ввести в поле Search Customer значение Harold
+
+Ожидаемый результат:
+
+1. На странице Customers в списке клиентов не осталось ни одной строчки.
