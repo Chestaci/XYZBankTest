@@ -2,4 +2,4 @@
 
 # https://chestaci.github.io/XYZBankTest/ allure report
 
-# Для просмотра тест кейсов см. XYZBankTestCase.docx
+# Для просмотра тест кейсов см. XYZBankTestCase.txt

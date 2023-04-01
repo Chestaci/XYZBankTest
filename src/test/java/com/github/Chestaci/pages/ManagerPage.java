@@ -4,57 +4,56 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * Объект страницы Manager
  */
 
-public class Manager {
-
-    private final WebDriver driver;
-
-    /**
-     * конструктор класса, занимающийся инициализацией полей класса
-     */
-    public Manager(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
+public class ManagerPage extends Page {
 
     /**
      * определение локатора поля кнопки добавления клиента
      */
-    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/button[1]")
-     private WebElement addCustomerButton;
-
+    @FindBy(xpath = "//*[contains(@ng-class,'btnClass1')]")
+    private WebElement addCustomerButton;
 
     /**
      * определение локатора поля кнопки списка клиентов
      */
-    @FindBy(xpath = "/html/body/div/div/div[2]/div/div[1]/button[3]")
+    @FindBy(xpath = "//*[contains(@ng-class,'btnClass3')]")
     private WebElement customersButton;
 
 
     /**
+     * конструктор класса, занимающийся инициализацией полей класса
+     *
+     * @param driver
+     */
+    public ManagerPage(WebDriver driver) {
+        super(driver);
+    }
+
+    /**
      * метод для осуществления нажатия кнопки добавления клиента
-     * @return возвращает страницу AddCust
-     * @see AddCust
+     *
+     * @return возвращает страницу AddCustomer
+     * @see AddCustomerPage
      */
     @Step("Нажатие на кнопку добавления клиента")
-    public AddCust clickAddCustomerButton() {
+    public AddCustomerPage clickAddCustomerButton() {
         addCustomerButton.click();
-        return new AddCust(this.driver);
+        return new AddCustomerPage(this.driver);
     }
 
     /**
      * метод для осуществления нажатия кнопки списка клиентов
-     * @return возвращает страницу ListCust
-     * @see ListCust
+     *
+     * @return возвращает страницу ListCustomer
+     * @see ListCustomerPage
      */
     @Step("Нажатие на кнопку списка клиентов")
-    public ListCust clickCustomersButton() {
+    public ListCustomerPage clickCustomersButton() {
         customersButton.click();
-        return new ListCust(this.driver);
+        return new ListCustomerPage(this.driver);
     }
 }
