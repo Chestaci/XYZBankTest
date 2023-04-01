@@ -101,6 +101,12 @@ public class CustomerSearchTest {
 
         listCustomerPage.inputSearchCustomer(searchCustomer);
 
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         //Получение списока строк в таблице с клиентами после
         //проведения поиска по заданным параметрам
         List<WebTableElement> customersList = listCustomerPage.getTableCustomerList().getListElement();
