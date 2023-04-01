@@ -26,7 +26,7 @@ import java.util.List;
 @Story("Тесты успешной сортировки клиентов")
 public class SortTest {
 
-    private final long DElAY_SECONDS = 20;
+    private final long DElAY_SECONDS = 60;
     private ManagerPage managerPage;
     private ListCustomerPage listCustomerPage;
     private WebDriver driver = null;

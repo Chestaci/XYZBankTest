@@ -29,7 +29,7 @@ import java.util.List;
 @Feature("Тесты проверки поиска клиентов")
 public class CustomerSearchTest {
 
-    private final long DElAY_SECONDS = 20;
+    private final long DElAY_SECONDS = 60;
     private ManagerPage managerPage;
     private ListCustomerPage listCustomerPage;
     private WebDriver driver = null;
@@ -123,6 +123,6 @@ public class CustomerSearchTest {
         //Получение списока строк в таблице с клиентами по заданным параметрам поиска
         List<WebTableElement> customersList = listCustomerPage.getTableCustomerList().getListElement();
 
-        Assertions.assertTrue(customersList.isEmpty());
+        Assertions.assertTrue(customersList.isEmpty(), "Ожидаемый результат: список должен  быть пустым, фактический результат: " + customersList);
     }
 }

@@ -27,7 +27,7 @@ import java.time.Duration;
 @Feature("Тесты проверки добавления клиента")
 public class AddingCustomerTest {
 
-    private final long DElAY_SECONDS = 20;
+    private final long DElAY_SECONDS = 60;
     private ManagerPage managerPage;
     private AddCustomerPage addCustomerPage;
     private WebDriver driver = null;
