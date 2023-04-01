@@ -22,7 +22,6 @@ public class ListCustomerPage extends Page {
      */
     @FindBy(xpath = "//input[contains(@placeholder,'Search Customer')]")
     private WebElement searchCustomerField;
-    private final WebTable tableCustomerList;
 
     /**
      * конструктор класса, занимающийся инициализацией полей класса
@@ -31,7 +30,6 @@ public class ListCustomerPage extends Page {
      */
     public ListCustomerPage(WebDriver driver) {
         super(driver);
-        tableCustomerList = new WebTable(driver.findElement(By.xpath("//*[contains(@class,'table table-bordered table-striped')]")));
     }
 
     /**
@@ -41,7 +39,7 @@ public class ListCustomerPage extends Page {
      */
     @Step("Получение таблицы с клиентами")
     public WebTable getTableCustomerList() {
-        return tableCustomerList;
+        return new WebTable(driver.findElement(By.xpath("//*[contains(@class,'table table-bordered table-striped')]")));
     }
 
     /**
