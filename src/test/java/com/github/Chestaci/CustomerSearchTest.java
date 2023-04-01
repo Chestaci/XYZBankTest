@@ -29,7 +29,7 @@ import java.util.List;
 @Feature("Тесты проверки поиска клиентов")
 public class CustomerSearchTest {
 
-    private final long DElAY_SECONDS = 60;
+    private final long DElAY_SECONDS = 90;
     private ManagerPage managerPage;
     private ListCustomerPage listCustomerPage;
     private WebDriver driver = null;
