@@ -46,6 +46,7 @@ public class SortTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(DElAY_SECONDS));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(DElAY_SECONDS));
+        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(DElAY_SECONDS));
         managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         listCustomerPage = managerPage.clickCustomersButton();
