@@ -27,7 +27,7 @@ import java.time.Duration;
 @Feature("Тесты проверки добавления клиента")
 public class AddingCustomerTest {
 
-    private final long DElAY_SECONDS = 90;
+    private final long DElAY_SECONDS = 60;
     private ManagerPage managerPage;
     private AddCustomerPage addCustomerPage;
     private WebDriver driver = null;
@@ -47,7 +47,6 @@ public class AddingCustomerTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(DElAY_SECONDS));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(DElAY_SECONDS));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(DElAY_SECONDS));
         managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         addCustomerPage = managerPage.clickAddCustomerButton();
