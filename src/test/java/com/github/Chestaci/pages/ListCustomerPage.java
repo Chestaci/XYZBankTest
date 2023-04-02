@@ -1,10 +1,14 @@
 package com.github.Chestaci.pages;
 
+import com.github.Chestaci.elements.WebTableElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Объект страницы со списком клиентов
@@ -23,6 +27,9 @@ public class ListCustomerPage extends Page {
     @FindBy(xpath = "//input[contains(@placeholder,'Search Customer')]")
     private WebElement searchCustomerField;
 
+    @FindBy(xpath = "//*[contains(@class,'table table-bordered table-striped')]")
+    private WebElement tableCustomerList;
+
     /**
      * конструктор класса, занимающийся инициализацией полей класса
      *
@@ -33,32 +40,30 @@ public class ListCustomerPage extends Page {
     }
 
     /**
-     * метод для осуществления получения таблицы с клиентами
+     * метод для осуществления получения таблицы с клиентами в виде списка элементов строк
      *
-     * @return таблицу с клиентами
+     * @return таблицу с клиентами в виде списка элементов строк
      */
-    @Step("Получение таблицы с клиентами")
-    public WebTable getTableCustomerList() {
-        return new WebTable(driver.findElement(By.xpath("//*[contains(@class,'table table-bordered table-striped')]")));
-    }
+    @Step("Получение таблицы с клиентами в виде списка элементов строк")
+    public List<WebTableElement> getTableElementsList() {
 
-    /**
-     * метод для осуществления очистки поля ввода для поиска клиентов
-     */
-    @Step("Очистка поля ввода для поиска клиентов")
-    public void clearSearchField() {
-        searchCustomerField.clear();
-    }
+        List<WebTableElement> webTableElements = new ArrayList<>();
+        //получение тела таблицы
+        WebElement tbody = tableCustomerList.findElement(By.tagName("tbody"));
+        //получение строк
+        List<WebElement> tableRows = tbody.findElements(By.tagName("tr"));
 
-    /**
-     * метод для осуществления нажатия кнопки удаления клиента
-     *
-     * @param webTableElement строка из таблицы клиентов
-     * @see WebTableElement
-     */
-    @Step("Нажатие на кнопку Delete клиента {webTableElement} на странице со списком клиентов")
-    public void deleteCustomer(WebTableElement webTableElement) {
-        webTableElement.getDeleteButton().click();
+        if (tableRows.isEmpty()) {
+            return webTableElements;
+        }
+        //проход по значениям колонок каждой строки
+        for (WebElement rowElement : tableRows) {
+            List<WebElement> rowList = rowElement.findElements(By.tagName("td"));
+            WebTableElement webTableElement = new WebTableElement(rowList.get(0).getText(), rowList.get(1).getText(), rowList.get(2).getText(), rowList.get(3).getText(), rowList.get(4));
+            webTableElements.add(webTableElement);
+        }
+
+        return webTableElements;
     }
 
     /**
@@ -78,5 +83,4 @@ public class ListCustomerPage extends Page {
     public void inputSearchCustomer(String searchCustomer) {
         searchCustomerField.sendKeys(searchCustomer);
     }
-
 }

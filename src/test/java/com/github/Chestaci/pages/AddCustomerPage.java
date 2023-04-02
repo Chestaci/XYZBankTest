@@ -80,8 +80,8 @@ public class AddCustomerPage extends Page {
      *
      * @return возвращает текст подсказки
      */
-    @Step("Проверка текста подсказки")
-    public String checkFirstNameTooltip() {
+    @Step("Получение текста подсказки поля First Name")
+    private String getFirstNameTooltip() {
         return firstNameField.getAttribute("validationMessage");
     }
 
@@ -90,8 +90,8 @@ public class AddCustomerPage extends Page {
      *
      * @return возвращает текст подсказки
      */
-    @Step("Проверка текста подсказки")
-    public String checkLastNameTooltip() {
+    @Step("Получение текста подсказки поля Last Name")
+    private String getLastNameTooltip() {
         return lastNameField.getAttribute("validationMessage");
     }
 
@@ -100,8 +100,8 @@ public class AddCustomerPage extends Page {
      *
      * @return возвращает текст подсказки
      */
-    @Step("Проверка текста подсказки")
-    public String checkPostCodeTooltip() {
+    @Step("Получение текста подсказки поля Post Code")
+    private String getPostCodeTooltip() {
         return postCodeField.getAttribute("validationMessage");
     }
 
@@ -109,7 +109,7 @@ public class AddCustomerPage extends Page {
      * метод для осуществления нажатия на кнопку добавления нового клиента
      */
     @Step("Нажатие на кнопку добавления нового клиента")
-    public void clickAddNewCustomerButton() {
+    private void clickAddNewCustomerButton() {
         addNewCustomerButton.click();
     }
 
@@ -122,9 +122,46 @@ public class AddCustomerPage extends Page {
      * @param postCode  Почтовый индекс
      */
     @Step("Заполнение полей firstName: {firstName}, lastName: {lastName}, postCode: {postCode}")
-    public void fillCustomerFields(String firstName, String lastName, String postCode) {
+    private void fillCustomerFields(String firstName, String lastName, String postCode) {
         inputFirstName(firstName);
         inputLastName(lastName);
         inputPostCode(postCode);
+    }
+
+    /**
+     * Метод для осуществляющий действия по заполнению полей формы параметрами
+     *
+     * @param firstName Имя
+     * @param lastName  Фамилия
+     * @param postCode  Почтовый индекс,
+     *                  а также нажатие кнопки добавления нового клиента
+     */
+    @Step("Заполнение полей ввода firstName: {firstName}," + " lastName: {lastName}, postCode: {postCode} и нажатие на кнопку добавления клиента")
+    public void fillFieldsAndClick(String firstName, String lastName, String postCode) {
+        fillCustomerFields(firstName, lastName, postCode);
+        clickAddNewCustomerButton();
+    }
+
+
+    /**
+     * Метод для получения подсказки о незаполненном поле
+     *
+     * @param firstName первый параметр в строке файла
+     * @param lastName  второй параметр в строке файла
+     * @param postCode  третий параметр в строке файла
+     * @return подсказку о незаполненном поле
+     */
+    @Step("Получения подсказки о незаполненном поле")
+    public String getTooltipMessage(String firstName, String lastName, String postCode) {
+        if (firstName == null || firstName.isBlank() || firstName.isEmpty()) {
+            return getFirstNameTooltip();
+        }
+        if (lastName == null || lastName.isBlank() || lastName.isEmpty()) {
+            return getLastNameTooltip();
+        }
+        if (postCode == null || postCode.isBlank() || postCode.isEmpty()) {
+            return getPostCodeTooltip();
+        }
+        return "";
     }
 }

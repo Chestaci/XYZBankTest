@@ -1,10 +1,10 @@
 package com.github.Chestaci;
 
-
+import com.github.Chestaci.elements.WebTableElement;
 import com.github.Chestaci.pages.ListCustomerPage;
 import com.github.Chestaci.pages.ManagerPage;
-import com.github.Chestaci.pages.WebTableElement;
 import com.github.Chestaci.utils.ConfProperties;
+import com.github.Chestaci.utils.WebDriverUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -18,58 +18,24 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @DisplayName("Тесты поиска клиентов")
 @Feature("Тесты проверки поиска клиентов")
 public class CustomerSearchTest {
 
-    private final long DElAY_SECONDS = 60;
     private ManagerPage managerPage;
     private ListCustomerPage listCustomerPage;
     private WebDriver driver = null;
 
-    /**
-     * Метод сравнивает вводимые данные на совпадение в списке клиентов
-     *
-     * @param searchCustomer вводимые данные для поиска клиента
-     * @param customersList  список клиентов
-     * @return список найденных клиентов
-     * @see WebTableElement
-     */
-    @Step("Получение списка клиентов из таблицы, удовлетворяющих параметрам поиска")
-    private static List<WebTableElement> getContainsList(String searchCustomer, List<WebTableElement> customersList) {
-        List<WebTableElement> containsList = new ArrayList<>();
-        for (WebTableElement webTableElement : customersList) {
-
-            if (webTableElement.getFirstName().contains(searchCustomer) || webTableElement.getLastName().contains(searchCustomer) || webTableElement.getPostCode().contains(searchCustomer) || webTableElement.getAccountNumber().contains(searchCustomer)) {
-
-                containsList.add(webTableElement);
-            }
-        }
-        return containsList;
-    }
 
     @Step("Инициализация перед началом теста")
     @BeforeEach
     void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-extensions"); // disabling extensions
-        options.addArguments("--disable-gpu"); // applicable to windows os only
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(DElAY_SECONDS));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(DElAY_SECONDS));
+        driver = new ChromeDriver(WebDriverUtils.getChromeOptions());
+        WebDriverUtils.setUpDriver(driver);
         managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         listCustomerPage = managerPage.clickCustomersButton();
@@ -78,7 +44,6 @@ public class CustomerSearchTest {
     @Step("Завершающие действия после теста")
     @AfterEach
     void tearDown() {
-        listCustomerPage.clearSearchField();
         driver.quit();
     }
 
@@ -96,15 +61,22 @@ public class CustomerSearchTest {
     public void successfulSearchCustomerTest(String searchCustomer) {
         //Получение списока строк в таблице с клиентами, удовлетворяющих параметрам поиска
         //(для дальнейшего сравнения с результатом поиска)
-        List<WebTableElement> foundCustomersList = getContainsList(searchCustomer, listCustomerPage.getTableCustomerList().getListElement());
-        Collections.sort(foundCustomersList);
+        List<WebTableElement> foundCustomersList = listCustomerPage.getTableElementsList().
+                stream().
+                filter(webTableElement ->
+                        webTableElement.getFirstName().contains(searchCustomer) ||
+                                webTableElement.getLastName().contains(searchCustomer) ||
+                                webTableElement.getPostCode().contains(searchCustomer) ||
+                                ((webTableElement.getAccountNumber() != null) && (webTableElement.getAccountNumber().contains(searchCustomer)))
+                ).
+                sorted().
+                collect(Collectors.toList());
 
         listCustomerPage.inputSearchCustomer(searchCustomer);
 
         //Получение списока строк в таблице с клиентами после
         //проведения поиска по заданным параметрам
-        List<WebTableElement> customersList = listCustomerPage.getTableCustomerList().getListElement();
-        Collections.sort(customersList);
+        List<WebTableElement> customersList = listCustomerPage.getTableElementsList().stream().sorted().collect(Collectors.toList());
 
         Assertions.assertEquals(foundCustomersList, customersList);
     }
@@ -121,7 +93,7 @@ public class CustomerSearchTest {
         listCustomerPage.inputSearchCustomer(search);
 
         //Получение списока строк в таблице с клиентами по заданным параметрам поиска
-        List<WebTableElement> customersList = listCustomerPage.getTableCustomerList().getListElement();
+        List<WebTableElement> customersList = listCustomerPage.getTableElementsList();
 
         Assertions.assertTrue(customersList.isEmpty(), "Ожидаемый результат: список должен  быть пустым, фактический результат: " + customersList);
     }
