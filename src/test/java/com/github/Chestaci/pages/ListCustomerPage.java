@@ -28,8 +28,8 @@ public class ListCustomerPage extends Page {
     @FindBy(css = "input[ng-model=searchCustomer]")
     private WebElement searchCustomerField;
 
-//    @FindBy(css = "tr")
-//    private List<WebElement> rowList;
+    @FindBy(css = "tr")
+    private List<WebElement> rowList;
 
 
     /**
@@ -51,12 +51,13 @@ public class ListCustomerPage extends Page {
 
         List<WebTableElement> webTableElements = new ArrayList<>();
 
-        List<WebElement> rowList = driver.findElements(By.cssSelector("tr"));
         wait.until(ExpectedConditions.visibilityOfAllElements(rowList));
-//        wait.until(ExpectedConditions.(rowList));
+        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElements(rowList)));
+        rowList = driver.findElements(By.cssSelector("tr"));
 
         for (int i = 1; i < rowList.size(); i++) {
             WebElement webElement = rowList.get(i);
+
             List<WebElement> colList = webElement.findElements(By.tagName("td"));
 
             wait.until(ExpectedConditions.visibilityOfAllElements(colList));
