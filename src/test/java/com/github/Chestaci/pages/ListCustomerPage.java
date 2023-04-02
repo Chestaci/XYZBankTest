@@ -19,16 +19,17 @@ public class ListCustomerPage extends Page {
     /**
      * определение локатора вкладки first name
      */
-    @FindBy(xpath = "//*[contains(text(),'First Name')]")
+    @FindBy(css = "[ng-click*=fName]")
     private WebElement firstNameTab;
     /**
      * определение локатора поля ввода для поиска книентов
      */
-    @FindBy(xpath = "//input[contains(@placeholder,'Search Customer')]")
+    @FindBy(css = "input[ng-model=searchCustomer]")
     private WebElement searchCustomerField;
 
-    @FindBy(xpath = "//*[contains(@class,'table table-bordered table-striped')]")
-    private WebElement tableCustomerList;
+    @FindBy(css = "tr")
+    private List<WebElement> rowList;
+
 
     /**
      * конструктор класса, занимающийся инициализацией полей класса
@@ -48,19 +49,11 @@ public class ListCustomerPage extends Page {
     public List<WebTableElement> getTableElementsList() {
 
         List<WebTableElement> webTableElements = new ArrayList<>();
-        //получение тела таблицы
-        WebElement tbody = tableCustomerList.findElement(By.tagName("tbody"));
-        //получение строк
-        List<WebElement> tableRows = tbody.findElements(By.tagName("tr"));
 
-        if (tableRows.isEmpty()) {
-            return webTableElements;
-        }
-        //проход по значениям колонок каждой строки
-        for (WebElement rowElement : tableRows) {
-            List<WebElement> rowList = rowElement.findElements(By.tagName("td"));
-            WebTableElement webTableElement = new WebTableElement(rowList.get(0).getText(), rowList.get(1).getText(), rowList.get(2).getText(), rowList.get(3).getText(), rowList.get(4));
-            webTableElements.add(webTableElement);
+        for (int i = 1; i < rowList.size(); i++) {
+            WebElement webElement = rowList.get(i);
+            List<WebElement> colList = webElement.findElements(By.tagName("td"));
+            webTableElements.add(new WebTableElement(colList.get(0).getText(), colList.get(1).getText(), colList.get(2).getText(), colList.get(3).getText(), colList.get(4)));
         }
 
         return webTableElements;

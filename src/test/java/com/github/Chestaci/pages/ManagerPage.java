@@ -14,13 +14,13 @@ public class ManagerPage extends Page {
     /**
      * определение локатора поля кнопки добавления клиента
      */
-    @FindBy(xpath = "//*[contains(@ng-class,'btnClass1')]")
+    @FindBy(css = "[ng-class=btnClass1]")
     private WebElement addCustomerButton;
 
     /**
      * определение локатора поля кнопки списка клиентов
      */
-    @FindBy(xpath = "//*[contains(@ng-class,'btnClass3')]")
+    @FindBy(css = "[ng-class=btnClass3]")
     private WebElement customersButton;
 
 

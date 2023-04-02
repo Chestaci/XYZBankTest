@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 
 @DisplayName("Тесты добавления клиента")
@@ -30,8 +29,7 @@ public class AddingCustomerTest {
     @Step("Инициализация перед началом теста")
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver(WebDriverUtils.getChromeOptions());
-        WebDriverUtils.setUpDriver(driver);
+        driver = WebDriverUtils.getPreparedDriver();
         managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         addCustomerPage = managerPage.clickAddCustomerButton();
@@ -42,7 +40,6 @@ public class AddingCustomerTest {
     void tearDown() {
         driver.quit();
     }
-
 
     /**
      * Параметризированный тест для осуществления проверки успешного добавления клиента
@@ -67,7 +64,6 @@ public class AddingCustomerTest {
 
         Assertions.assertTrue(alertMessage.toUpperCase().contains(ConfProperties.getProperty("alert1").toUpperCase()), "Ожидаемый результат должен содержать: " + ConfProperties.getProperty("alert1") + ", фактический результат: " + alertMessage);
     }
-
 
     /**
      * Параметризированный тест для осуществления проверки получения подсказки о незаполненном поле при попытке

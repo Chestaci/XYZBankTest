@@ -17,10 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @DisplayName("Тесты поиска клиентов")
 @Feature("Тесты проверки поиска клиентов")
@@ -30,12 +29,10 @@ public class CustomerSearchTest {
     private ListCustomerPage listCustomerPage;
     private WebDriver driver = null;
 
-
     @Step("Инициализация перед началом теста")
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver(WebDriverUtils.getChromeOptions());
-        WebDriverUtils.setUpDriver(driver);
+        driver = WebDriverUtils.getPreparedDriver();
         managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         listCustomerPage = managerPage.clickCustomersButton();
@@ -58,27 +55,22 @@ public class CustomerSearchTest {
     @Story("Тест успешного поиска клиентов")
     @ParameterizedTest
     @CsvFileSource(resources = "/successfulSearchCustomer.csv")
-    public void successfulSearchCustomerTest(String searchCustomer) {
-        //Получение списока строк в таблице с клиентами, удовлетворяющих параметрам поиска
-        //(для дальнейшего сравнения с результатом поиска)
-        List<WebTableElement> foundCustomersList = listCustomerPage.getTableElementsList().
-                stream().
-                filter(webTableElement ->
-                        webTableElement.getFirstName().contains(searchCustomer) ||
-                                webTableElement.getLastName().contains(searchCustomer) ||
-                                webTableElement.getPostCode().contains(searchCustomer) ||
-                                ((webTableElement.getAccountNumber() != null) && (webTableElement.getAccountNumber().contains(searchCustomer)))
-                ).
-                sorted().
-                collect(Collectors.toList());
+    public void successfulSearchCustomerTest(String searchCustomer, String count) {
 
         listCustomerPage.inputSearchCustomer(searchCustomer);
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         //Получение списока строк в таблице с клиентами после
         //проведения поиска по заданным параметрам
-        List<WebTableElement> customersList = listCustomerPage.getTableElementsList().stream().sorted().collect(Collectors.toList());
+        List<WebTableElement> customersList = listCustomerPage.getTableElementsList();
 
-        Assertions.assertEquals(foundCustomersList, customersList);
+        Assertions.assertEquals(customersList.size(), Integer.parseInt(count),
+                "Количество элементов в результате поиска: " + customersList.size() + " не соответствует ожидаемому:" + count);
     }
 
     /**

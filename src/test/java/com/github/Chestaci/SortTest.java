@@ -17,7 +17,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
 
@@ -31,13 +30,11 @@ public class SortTest {
     @Step("Инициализация перед началом теста")
     @BeforeEach
     void setUp() {
-        driver = new ChromeDriver(WebDriverUtils.getChromeOptions());
-        WebDriverUtils.setUpDriver(driver);
+        driver = WebDriverUtils.getPreparedDriver();
         ManagerPage managerPage = new ManagerPage(driver);
         driver.get(ConfProperties.getProperty("manager_page"));
         listCustomerPage = managerPage.clickCustomersButton();
     }
-
 
     @Step("Завершающие действия после теста")
     @AfterEach
@@ -68,7 +65,6 @@ public class SortTest {
         Assertions.assertEquals(customersListBefore, customersListAfter);
 
     }
-
 
     /**
      * тестовый метод для осуществления проверки успешной сортировки клиентов по имени в алфавитном порядке

@@ -1,6 +1,7 @@
 package com.github.Chestaci.utils;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
@@ -10,7 +11,7 @@ import java.time.Duration;
  */
 public class WebDriverUtils {
 
-    public static ChromeOptions getChromeOptions() {
+    private static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-extensions"); // disabling extensions
@@ -21,12 +22,17 @@ public class WebDriverUtils {
         return options;
     }
 
-    public static void setUpDriver(WebDriver driver) {
+    private static void setUpDriver(WebDriver driver) {
         long delaySeconds = 60;
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(delaySeconds));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(delaySeconds));
     }
 
+    public static WebDriver getPreparedDriver(){
+        WebDriver webDriver = new ChromeDriver(getChromeOptions());
+        setUpDriver(webDriver);
+        return webDriver;
+    }
 
 }

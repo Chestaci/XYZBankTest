@@ -15,22 +15,22 @@ public class AddCustomerPage extends Page {
     /**
      * определение локатора поля ввода first name
      */
-    @FindBy(xpath = "//input[contains(@placeholder,'First Name')]")
+    @FindBy(css = "input[ng-model=fName]")
     private WebElement firstNameField;
     /**
      * определение локатора поля ввода last name
      */
-    @FindBy(xpath = "//input[contains(@placeholder,'Last Name')]")
+    @FindBy(css = "input[ng-model=lName]")
     private WebElement lastNameField;
     /**
      * определение локатора поля ввода post code
      */
-    @FindBy(xpath = "//input[contains(@placeholder,'Post Code')]")
+    @FindBy(css = "input[ng-model=postCd]")
     private WebElement postCodeField;
     /**
      * определение локатора поля кнопки добавления нового клиента
      */
-    @FindBy(xpath = "//*[contains(@class,'btn btn-default')]")
+    @FindBy(css = "[type=submit]")
     private WebElement addNewCustomerButton;
 
     /**
