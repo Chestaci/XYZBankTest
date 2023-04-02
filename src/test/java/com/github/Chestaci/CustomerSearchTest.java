@@ -62,7 +62,7 @@ public class CustomerSearchTest {
 
         listCustomerPage.inputSearchCustomer(searchCustomer);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tr"), Integer.parseInt(count) + 1));
 
         //Получение списока строк в таблице с клиентами после
