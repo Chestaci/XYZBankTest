@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class ListCustomerPage extends Page {
     public List<WebTableElement> getTableElementsList() {
 
         List<WebTableElement> webTableElements = new ArrayList<>();
+        wait.until(ExpectedConditions.visibilityOfAllElements(rowList));
 
         for (int i = 1; i < rowList.size(); i++) {
             WebElement webElement = rowList.get(i);
