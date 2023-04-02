@@ -55,6 +55,9 @@ public class ListCustomerPage extends Page {
         for (int i = 1; i < rowList.size(); i++) {
             WebElement webElement = rowList.get(i);
             List<WebElement> colList = webElement.findElements(By.tagName("td"));
+
+            wait.until(ExpectedConditions.visibilityOfAllElements(colList));
+
             webTableElements.add(new WebTableElement(colList.get(0).getText(), colList.get(1).getText(), colList.get(2).getText(), colList.get(3).getText(), colList.get(4)));
         }
 
