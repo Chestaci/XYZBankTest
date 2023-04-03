@@ -110,6 +110,7 @@ public class AddCustomerPage extends Page {
      */
     @Step("Нажатие на кнопку добавления нового клиента")
     private void clickAddNewCustomerButton() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(addNewCustomerButton));
         addNewCustomerButton.click();
     }
 

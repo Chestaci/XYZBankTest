@@ -73,6 +73,7 @@ public class ListCustomerPage extends Page {
      */
     @Step("Нажатие на вкладку first name")
     public void clickFirstNameTab() {
+        wait.until(ExpectedConditions.visibilityOfAllElements(firstNameTab));
         firstNameTab.click();
     }
 
@@ -83,6 +84,7 @@ public class ListCustomerPage extends Page {
      */
     @Step("Заполнение поля ввода для поиска книентов: {searchCustomer}")
     public void inputSearchCustomer(String searchCustomer) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(searchCustomerField));
         searchCustomerField.sendKeys(searchCustomer);
     }
 
