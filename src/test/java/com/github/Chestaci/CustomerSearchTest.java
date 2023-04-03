@@ -4,7 +4,6 @@ import com.github.Chestaci.elements.WebTableElement;
 import com.github.Chestaci.pages.ListCustomerPage;
 import com.github.Chestaci.pages.ManagerPage;
 import com.github.Chestaci.utils.ConfProperties;
-import com.github.Chestaci.utils.ScreenshotUtils;
 import com.github.Chestaci.utils.WebDriverUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -17,12 +16,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 @DisplayName("Тесты поиска клиентов")
@@ -61,16 +56,7 @@ public class CustomerSearchTest {
     @CsvFileSource(resources = "/successfulSearchCustomer.csv")
     public void successfulSearchCustomerTest(String searchCustomer, String count) {
 
-        ScreenshotUtils.getScreenshot(driver);
-
         listCustomerPage.inputSearchCustomer(searchCustomer);
-
-        ScreenshotUtils.getScreenshot(driver);
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
-        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tr"), Integer.parseInt(count) + 1));
-
-        ScreenshotUtils.getScreenshot(driver);
 
         //Получение списка строк в таблице с клиентами после
         //проведения поиска по заданным параметрам

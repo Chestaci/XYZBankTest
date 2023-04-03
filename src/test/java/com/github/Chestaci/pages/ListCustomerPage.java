@@ -87,9 +87,6 @@ public class ListCustomerPage extends Page {
         searchCustomerField.clear();
         searchCustomerField.click();
         searchCustomerField.sendKeys(searchCustomer);
-    }
-
-    public List<WebElement> getRowList() {
-        return rowList;
+        searchCustomerField.click();
     }
 }
