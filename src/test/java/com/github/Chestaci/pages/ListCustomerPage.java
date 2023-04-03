@@ -83,10 +83,6 @@ public class ListCustomerPage extends Page {
     @Step("Заполнение поля ввода для поиска клиентов: {searchCustomer}")
     public void inputSearchCustomer(String searchCustomer) {
         wait.until(ExpectedConditions.visibilityOfAllElements(searchCustomerField));
-        searchCustomerField.click();
-        searchCustomerField.clear();
-        searchCustomerField.click();
         searchCustomerField.sendKeys(searchCustomer);
-        searchCustomerField.click();
     }
 }
