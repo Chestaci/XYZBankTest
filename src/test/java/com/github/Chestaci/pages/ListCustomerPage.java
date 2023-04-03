@@ -51,9 +51,7 @@ public class ListCustomerPage extends Page {
 
         List<WebTableElement> webTableElements = new ArrayList<>();
 
-//        wait.until(ExpectedConditions.visibilityOfAllElements(rowList));
-//        wait.until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfAllElements(rowList)));
-//        rowList = driver.findElements(By.cssSelector("tr"));
+        wait.until(ExpectedConditions.visibilityOfAllElements(rowList));
 
         for (int i = 1; i < rowList.size(); i++) {
             WebElement webElement = rowList.get(i);
@@ -82,9 +80,12 @@ public class ListCustomerPage extends Page {
      *
      * @param searchCustomer Данные для поиска клиента
      */
-    @Step("Заполнение поля ввода для поиска книентов: {searchCustomer}")
+    @Step("Заполнение поля ввода для поиска клиентов: {searchCustomer}")
     public void inputSearchCustomer(String searchCustomer) {
         wait.until(ExpectedConditions.visibilityOfAllElements(searchCustomerField));
+        searchCustomerField.click();
+        searchCustomerField.clear();
+        searchCustomerField.click();
         searchCustomerField.sendKeys(searchCustomer);
     }
 

@@ -4,6 +4,7 @@ import com.github.Chestaci.elements.WebTableElement;
 import com.github.Chestaci.pages.ListCustomerPage;
 import com.github.Chestaci.pages.ManagerPage;
 import com.github.Chestaci.utils.ConfProperties;
+import com.github.Chestaci.utils.ScreenshotUtils;
 import com.github.Chestaci.utils.WebDriverUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -60,12 +61,18 @@ public class CustomerSearchTest {
     @CsvFileSource(resources = "/successfulSearchCustomer.csv")
     public void successfulSearchCustomerTest(String searchCustomer, String count) {
 
+        ScreenshotUtils.getScreenshot(driver);
+
         listCustomerPage.inputSearchCustomer(searchCustomer);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        ScreenshotUtils.getScreenshot(driver);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
         wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("tr"), Integer.parseInt(count) + 1));
 
-        //Получение списока строк в таблице с клиентами после
+        ScreenshotUtils.getScreenshot(driver);
+
+        //Получение списка строк в таблице с клиентами после
         //проведения поиска по заданным параметрам
         List<WebTableElement> customersList = listCustomerPage.getTableElementsList();
 

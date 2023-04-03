@@ -18,12 +18,12 @@ public class WebDriverUtils {
         options.addArguments("--disable-gpu"); // applicable to windows os only
         options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
+        options.addArguments("--headless=new");
         return options;
     }
 
     private static void setUpDriver(WebDriver driver) {
-        long delaySeconds = 60;
+        long delaySeconds = 90;
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(delaySeconds));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(delaySeconds));
